@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="shortcut icon" href="img/logos/favicon.ico" type="image/x-icon">
+   <title>Carta - El Holandes Errante</title>
+   <meta name="description" content="Veni a disfrutar de cervezas artesanales y comida casera en Villa Urquiza. Delivery disponible en nuestro sitio web">
+   <meta name="keywords"  content="CERVEZAS, ARTESANALES, HAMBURGUESAS, SANGUCHES, PIZZAS, COMIDA, TRAGOS, URQUIZA">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+   <link rel="stylesheet" href="styles.css">
+</head>
+<body class="menu">
+   <section class="carta" >
+      <div class=" carta__bar container-fluid fixed flex-row ">
+         <nav class="navbar navbar-expand-lg  ">
+            <div>
+               <a class="navbar-brand" href="#">CARTA</a>
+               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+               <img class="navbar-toggler-icon" src="icons/menu.svg" alt="">
+               </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+               <li class="nav-item ">
+                  <a class="nav-link" href="#pizzas">PIZZAS </a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="#sanguches">SANGUCHES</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" target="_blank" href="https://menu.fu.do/holandeserrante">DELIVERY</a>
+               </li>
+            </ul>
+            </div>
+         </nav>
+      </div>
+      <div class="carta__products container">
+         <button type="button" id="ver"class="btn btn-outline-success">Ver carrito en consola</button>
+         <ul>
+            <li>
+               <div class="absolute btn_ord">
+                  <button type="button" id="ordenar" class="btn btn-info">Ordenar en consola</button>
+               </div>
+            </li>
+            <li>
+               <h3>PIZZAS</h3>
+               <ul id="pizzas" class=" row carta__products-info"></ul>
+            </li>
+            <li>
+               <h3 >SANGUCHES</h3>
+               <ul  id="sanguches" class=" row carta__products-info"></ul>                     
+            </li>
+         </ul>
+      </div>
+   </section>
+   <footer class="flex-row container-fluid p-2">
+      <div class="footer_info col-12 col-md-4">
+        <a href="encontranos.html">
+          <h4>Villa Urquiza</h4>
+          <p class="footer_info-adress">Pedro Ignacio Rivera 4700</p>
+        </a>
+         <P>Martes a Domingos 18.30 a 00 hs</P>
+         <p>Viernes y Sabados hasta las 02 hs</p>
+      </div>
+      <div class="footer_logo col-12 col-md-4">
+        <a href="index.html">
+          <img src="img/logos/logo.png" alt="logo marca">
+        </a>
+      </div>
+      <ul class="flex-row col-12 col-md-4">
+         <li> 
+            <a target="blank" href="https://www.facebook.com/elpuertocervecero/">
+               <img class="footer__img" src="icons/facebook.svg" alt="icono facebook">
+            </a>
+         </li>
+         <li> 
+            <a target="blank" href="https://www.instagram.com/holandeserrantebar/?hl=es-la">
+               <img class="footer__img" src="icons/instagram (1).svg" alt="icono Instagram">
+            </a>
+         </li>
+         <li> 
+            <a target="blank" href="https://api.whatsapp.com/send?phone=5491123800654&text=Hola!%20Quiero%20hacer%20un%20pedido.">
+               <img class="footer__img" src="icons/whatsapp (1).svg" alt="icono whatsapp">
+            </a>
+         </li>
+      </ul>
+   </footer>
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+   <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+ 
+ :root {
+  font-size: 10px; }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400; }
+
+ul, ol {
+  list-style-type: none; }
+
+.fixed {
+  position: fixed; }
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; }
+
+.flex-column {
+  display: flex;
+  flex-direction: column; }
+
+.absolute {
+  position: absolute; }
+
+/*-----HEADER-----*/
+
+.nav-link {
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  margin: 1.5rem; }
+
+.nav-link:hover {
+  color: #70ce70; }
+
+
+/*-----CARTA-----*/
+.menu {
+   background-color: white; }
+ 
+ .carta .carta__bar {
+   background-color: rgba(131, 131, 131, 0.911);
+   z-index: 2;
+   justify-content: center;
+   align-items: center; }
+ 
+ .carta .navbar-brand {
+   font-size: 3rem;
+   font-weight: 800;
+   color: white; }
+ 
+ .carta__bar nav .nav-item {
+   color: white;
+   font-size: 1.8rem; }
+ 
+ .carta__products {
+   padding-top: 15vh; }
+   .carta__products li {
+     margin-bottom: 3rem; }
+     .carta__products li h3 {
+       margin-bottom: 2rem;
+       font-size: 2.8rem;
+       font-weight: 700; }
+ 
+ .carta__products-info {
+   justify-content: space-evenly;
+   align-items: center; }
+   .carta__products-info li .carta__products-info-div {
+     padding: 3.2rem;
+     background-color: #e9e8e8;
+     border-radius: 1.6rem; }
+     .carta__products-info li .carta__products-info-div h4 {
+       font-size: 2rem;
+       font-weight: 550; }
+     .carta__products-info li .carta__products-info-div span {
+       font-size: 1.8rem;
+       font-weight: 600; }
+     .carta__products-info li .carta__products-info-div p {
+       font-size: 1.6rem; }
+   .carta__products-info li img {
+     width: 100%;
+     height: 30%;
+     margin-bottom: 1.6rem; }
+ 
+ .carta__products-info-div:hover {
+   box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2); }
+ 
+ .carta__products-info li h4 {
+   margin-bottom: 1.6rem;
+   font-size: 2rem;
+   font-weight: 500; }
+ 
+ .carta__products-info li P {
+   font-size: 1.5rem; }
+  
+  .btn-edit{
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    font-size: 1.4rem;
+  }
+  .btn_ord{
+    right: 22rem;
+  }
+  .btn_ord button{
+    font-size: 1.5rem;
+  }
+  #ver{
+    font-size: 1.5rem;
+  }
+ /*-----FOOTER-----*/
+ footer {
+   background-color: rgba(27, 27, 27, 0.945);
+   justify-content: space-between;
+   align-items: center; }
+ 
+ .footer_info {
+   color: white;
+   font-size: 1.5rem;
+   text-align: center;
+   font-weight: 400;
+   padding: 1rem; }
+ 
+ footer .footer_info a {
+   color: white; }
+ 
+ footer .footer_info a:hover {
+   text-decoration: none;
+   color: #70ce70; }
+ 
+ .footer_info h4 {
+   font-size: 1.6rem;
+   font-weight: 700;
+   margin-bottom: 0.2rem; }
+ 
+ .footer_info p {
+   margin: 0;
+   font-size: 1.4rem; }
+ 
+ .footer_info-adress {
+   font-size: 1.5rem;
+   font-weight: 700;
+   margin-bottom: 0.8rem; }
+ 
+ .footer_logo {
+   text-align: center; }
+ 
+ .footer_logo img {
+   width: 70px; }
+ 
+ footer ul {
+   justify-content: space-evenly;
+   align-items: center; }
+ 
+ .footer__img {
+   width: 2.5rem;
+   opacity: 80%;
+   transition: all 0.3s; }
+ 
+ .footer__img:hover {
+   transform: scale(1.3);
+   opacity: 100%; }
+ 
+ @media only screen and (max-width: 768px) {
+   footer div, ul {
+     margin-bottom: 3.2rem; } }
+ 
+@media (max-width: 767.98px) {
+    .carta__products-info-div img {
+       width: 85%; } }
