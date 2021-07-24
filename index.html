@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,8 +12,34 @@
    <link rel="stylesheet" href="styles.css">
 </head>
 <body class="menu">
+   <!-- Modal -->
+   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Tu pedido</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <table class="table table-hover">
+               
+               <tbody id="carrito">
+               
+               </tbody>
+             </table>
+            
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary">Finalizar compra</button>
+         </div>
+      </div>
+      </div>
+   </div>
    <section class="carta" >
-      <div class=" carta__bar container-fluid fixed flex-row ">
+      <div id="header" class=" carta__bar container-fluid fixed flex-row ">
          <nav class="navbar navbar-expand-lg  ">
             <div>
                <a class="navbar-brand" href="#">CARTA</a>
@@ -24,32 +50,37 @@
             <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                <li class="nav-item ">
-                  <a class="nav-link" href="#pizzas">PIZZAS </a>
+                  <a id="btn-pizzas" class="nav-link" href="#pizzas">PIZZAS </a>
                </li>
                <li class="nav-item">
-                  <a class="nav-link" href="#sanguches">SANGUCHES</a>
+                  <a id="btn-sangs" class="nav-link" href="#sanguches">SANGUCHES</a>
                </li>
                <li class="nav-item">
-                  <a class="nav-link" target="_blank" href="https://menu.fu.do/holandeserrante">DELIVERY</a>
+                  <img id="btn-carrito" class="nav-icon" src="icons/shopping-cart.svg" data-toggle="modal" data-target="#exampleModal"alt="">
+
                </li>
             </ul>
             </div>
          </nav>
       </div>
       <div class="carta__products container">
-         <button type="button" id="ver"class="btn btn-outline-success">Ver carrito en consola</button>
          <ul>
-            <li>
+            <li class="row">
+               <h3 id="h3-pizzas">PIZZAS</h3>
                <div class="absolute btn_ord">
-                  <button type="button" id="ordenar" class="btn btn-info">Ordenar en consola</button>
+                  <button type="button" id="ordenarPizzas" class="btn btn-info">Ordenar por precio</button>
                </div>
             </li>
             <li>
-               <h3>PIZZAS</h3>
                <ul id="pizzas" class=" row carta__products-info"></ul>
             </li>
+            <li class="row">
+               <h3 id="h3-sangs">SANGUCHES</h3>
+               <div class="absolute btn_ord">
+                  <button type="button" id="ordenarSangs" class="btn btn-info">Ordenar por precio</button>
+               </div>
+            </li>
             <li>
-               <h3 >SANGUCHES</h3>
                <ul  id="sanguches" class=" row carta__products-info"></ul>                     
             </li>
          </ul>
@@ -89,6 +120,8 @@
    </footer>
    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
    <script src="script.js"></script>
 </body>
 </html>

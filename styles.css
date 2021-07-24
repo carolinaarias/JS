@@ -40,8 +40,10 @@ ul, ol {
 
 .nav-link:hover {
   color: #70ce70; }
-
-
+.nav-icon{
+  width: 4rem;
+  cursor: pointer;
+}
 /*-----CARTA-----*/
 .menu {
    background-color: white; }
@@ -60,15 +62,15 @@ ul, ol {
  .carta__bar nav .nav-item {
    color: white;
    font-size: 1.8rem; }
- 
+  
  .carta__products {
    padding-top: 15vh; }
-   .carta__products li {
+  .carta__products li {
      margin-bottom: 3rem; }
-     .carta__products li h3 {
-       margin-bottom: 2rem;
-       font-size: 2.8rem;
-       font-weight: 700; }
+  .carta__products li h3 {
+    margin-bottom: 2rem;
+    font-size: 2.8rem;
+    font-weight: 700; }
  
  .carta__products-info {
    justify-content: space-evenly;
@@ -107,14 +109,18 @@ ul, ol {
     font-size: 1.4rem;
   }
   .btn_ord{
-    right: 22rem;
+    right: 25rem;
   }
   .btn_ord button{
     font-size: 1.5rem;
   }
-  #ver{
-    font-size: 1.5rem;
+  #carrito td{
+    width: 25%;
   }
+  .modal-img{
+    width: 10rem;
+  }
+
  /*-----FOOTER-----*/
  footer {
    background-color: rgba(27, 27, 27, 0.945);

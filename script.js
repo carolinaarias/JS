@@ -1,175 +1,196 @@
-var anio = 2021;
+//AJAX
+$(document).ready(function() {
+   $.get('productos.json', function(datos){
+      createItems($("#pizzas"),datos.slice(0,3),datos)
+  });
+  $.get('productos.json', function(datos){
+      createItems($("#sanguches"),datos.slice(3,7),datos);
+   });
+});
 
-calcularEdad(anio,parseInt(prompt("Este sitio contiene bebidas alcohólicas, ingresá el año de tu nacimiento:")))
-function calcularEdad (anio,anioNacimiento){
-   let edad = anio - anioNacimiento;
-   if (edad<18){
-      alert("No tendras acceso a las bebidas con alcohol.");
-   }else if(edad>=18){
-      alert("Ya podes comprar.");
-   }else{
-      alert("Inavlido");
+let listaCarrito = JSON.parse(localStorage.getItem('Carrito')) || [];
+
+//ANIMACIONES MENU
+function scrollTop (ul,h3,btn){
+   displayNone(h3,btn)
+   $('html').animate({
+      scrollTop: $(ul).offset().top - 150
+   },1000)
+   $(h3).delay(1000);
+   $(btn).delay(1000);
+   titleSlide (h3,btn);
+};
+function titleSlide (h3,btn){
+   $(btn).slideDown(800);
+   $(h3).slideDown(800);
+};
+function displayNone(h3,btn){
+   $(h3).css("display","none");
+   $(btn).css("display","none");
+}
+
+$("#btn-pizzas").click(function() {
+   scrollTop($("#pizzas"),$("#h3-pizzas"),$("#ordenarPizzas"));
+ });
+ $("#btn-sangs").click(function() {
+   scrollTop($("#sanguches"),$("#h3-sangs"),$("#ordenarSangs"));
+ });
+
+//PLANTILLA DE PRODUCTOS
+// class Productos{
+//    constructor(img,id,titulo,descripcion,precio){
+//       this.img = img;
+//       this.id = id;
+//       this.titulo = titulo;
+//       this.descripcion = descripcion;
+//       this.precio = precio;
+//    }
+//    promociones (banco){
+//       let descuento;
+//       let precio = this.precio;
+//       switch(banco){
+//          case banco ="itau":
+//             descuento = 10;
+//             alert("El banco Itau tiene el 10% de descuento");
+//             break;
+//          case banco = "santander":
+//             descuento = 5;
+//             alert("El banco Santander tiene el 5% de descuento");
+//             break;
+//          case banco = "bbva":
+//             descuento = 15;
+//             alert("El banco Frances tiene el 15% de descuento");
+//             break;
+//          default :
+//             descuento = 0;
+//             alert("Ese banco no posee promociones")
+//       }
+//       function calcularIva (precio){
+//          let costoIva = precio * 1.21;
+//          return costoIva;
+//       }
+//       function calcularPromo (descuento){
+//          let costoTotal = calcularIva(precio);
+//          let porcentaje = ((costoTotal * descuento)/100);
+//          let precioFinal = costoTotal - porcentaje;
+//          return precioFinal;
+//       }
+//       let costoIva = calcularIva(precio);
+//       alert("Precio con iva de la pizza: " + this.id+" $" +costoIva);
+//       let precioFinal = calcularPromo(descuento);
+//       alert("El precio final con el descuento es de $ " + precioFinal)
+//    } 
+// }
+//Crear Productos
+// const pizza1 = new Productos("img/comida/Muzza .png",1,"Muzzarella","Queso muzzarella con oregano.",500);
+// const pizza2 = new Productos("img/comida/Roque (1).png",2,"Roquefort","Queso roquefort con oregano.",800);
+// const pizza3 = new Productos("img/comida/Rucula (1).png",3,"Rucula","Rucula con jamon crudo y muzzarella.",700);
+// const sang1 = new Productos("img/comida/Sw-Bondio.png",1,"Bondiola","Bondiola braseada, queso brie y pan de papa.",700);
+// const sang2 = new Productos("img/comida/Sw-Coleslow.png",2,"Coleslow","Vacio, muzzarella gratinada y ensalada coleslow.",750);
+// const sang3 = new Productos("img/comida/Sw-Crudo.png",3,"Jamon Crudo","Jamon crudo, brie y rucula.",650);
+
+
+//FUNCION PARA GENERAR HTML DE LOS PRODUCTOS
+function createItems(ul,lista,productos){
+   for (const elementos of lista){
+      $(ul).append(`<li class='col-12 col-md-6 col-lg-4'> 
+                              <div class='carta__products-info-div'>
+                                 <div>
+                                    <img class="rounded-lg"src='${elementos.img}'></img>
+                                 </div>
+                                 <div>
+                                    <h4>${elementos.nombre}</h4>
+                                    <span>$ ${elementos.precio}</span>
+                                    <p> ${elementos.descripcion}</p>
+                                    <button type="button" id="btn${elementos.id}" class="btn-edit btn btn-outline-success">Agregar a carrito</button>
+                                 </div>
+                              </div>
+                           </li>`);
+      $(`#btn${elementos.id}`).on('click', function() {
+         //buscar producto por id
+         let prodSeleccionado = listaCarrito.find(({id}) => id == elementos.id);
+         (prodSeleccionado != undefined) ? prodSeleccionado.cant++ : agregarProd(productos[elementos.id - 1]);
+         localStorage.setItem('Carrito', JSON.stringify(listaCarrito));
+      });
    }
 }
 
-class Productos{
-   constructor(img,id,descripcion,precio){
-      this.img = img;
-      this.id = id;
-      this.descripcion = descripcion;
-      this.precio = precio;
-   }
-   promociones (banco){
-      let descuento;
-      let precio = this.precio;
-      switch(banco){
-         case banco ="itau":
-            descuento = 10;
-            alert("El banco Itau tiene el 10% de descuento");
-            break;
-         case banco = "santander":
-            descuento = 5;
-            alert("El banco Santander tiene el 5% de descuento");
-            break;
-         case banco = "bbva":
-            descuento = 15;
-            alert("El banco Frances tiene el 15% de descuento");
-            break;
-         default :
-            descuento = 0;
-            alert("Ese banco no posee promociones")
-      }
-      function calcularIva (precio){
-         let costoIva = precio * 1.21;
-         return costoIva;
-      }
-      function calcularPromo (descuento){
-         let costoTotal = calcularIva(precio);
-         let porcentaje = ((costoTotal * descuento)/100);
-         let precioFinal = costoTotal - porcentaje;
-         return precioFinal;
-      }
-      let costoIva = calcularIva(precio)
-      alert("Precio con iva de la pizza: " + this.id+" $" +costoIva);
-      let precioFinal = calcularPromo(descuento);
-      alert("El precio final con el descuento es de $ " + precioFinal)
-   } 
-}
-const pizza1 = new Productos("img/comida/Muzza .png","Muzzarella","Queso muzzarella con oregano.",500);
-const pizza2 = new Productos("img/comida/Roque (1).png","Roquefort","Queso roquefort con oregano.",700);
-const pizza3 = new Productos("img/comida/Rucula (1).png","Rucula","Rucula con jamon crudo y muzzarella.",800);
-const pizzas = [pizza2,pizza3,pizza1]
-const sang1 = new Productos("img/comida/Sw-Bondio.png","Bondiola","Bondiola braseada, queso brie y pan de papa.",700);
-const sang2 = new Productos("img/comida/Sw-Coleslow.png","Coleslow","Vacio, muzzarella gratinada y ensalada coleslow.",700);
-const sang3 = new Productos("img/comida/Sw-Crudo.png","Jamon Crudo","Jamon crudo, brie y rucula.",650);
-const sangs = [sang1,sang2,sang3]
-
-let contenedor = document.getElementById("pizzas");
-for (const pizza of pizzas){
-   let li = document.createElement("li");
-   li.setAttribute("class", "col-12 col-md-6 col-lg-4");
-   contenedor.appendChild(li);
-
-   let contenedorProducto = document.createElement("div");
-   contenedorProducto.setAttribute("class","carta__products-info-div");
-   li.appendChild(contenedorProducto);
-
-   let contenedorImg = document.createElement("div");
-   contenedorProducto.appendChild(contenedorImg);
-   let img = document.createElement("img");
-   img.src = pizza.img;
-   contenedorImg.appendChild(img);
-
-   let contenedorTexto = document.createElement("div");
-   contenedorProducto.appendChild(contenedorTexto);
-   contenedorTexto.innerHTML = ` <h4>${pizza.id}</h4>
-                                 <span>$ ${pizza.precio}</span>
-                                 <p> ${pizza.descripcion}</p>
-                                 <button type="button" onclick="carrito()" class="btn-edit btn btn-outline-success">Agregar a carrito</button>`;
-}
-let contenedor2 = document.getElementById("sanguches");
-for (const sang of sangs){
-   let li = document.createElement("li");
-   li.setAttribute("class", "col-12 col-md-6 col-lg-4");
-   contenedor2.appendChild(li);
-
-   let contenedorProducto = document.createElement("div");
-   contenedorProducto.setAttribute("class","carta__products-info-div");
-   li.appendChild(contenedorProducto);
-
-   let contenedorImg = document.createElement("div");
-   contenedorProducto.appendChild(contenedorImg);
-   let img = document.createElement("img");
-   img.src = sang.img;
-   contenedorImg.appendChild(img);
-
-   let contenedorTexto = document.createElement("div");
-   contenedorProducto.appendChild(contenedorTexto);
-   contenedorTexto.innerHTML = ` <h4>${sang.id}</h4>
-                                 <span>$ ${sang.precio}</span>
-                                 <p> ${sang.descripcion}</p>
-                                 <button type="button" onclick="carrito()" class="btn-edit btn btn-outline-success">Agregar a carrito</button>`;
-}
-
-let ordenarBoton=document.getElementById("ordenar");
-ordenarBoton.addEventListener("click", ordenar);
-function ordenar(){
-   console.log("De menor a mayor precio: ")
-   const listaPizzasPrecio = [pizzas.sort(function (a, b){
+//Ordenar Productos
+$("#ordenarPizzas").on('click', function(){
+   ordenarTodo(pizzas,$("#pizzas"))
+});
+$("#ordenarSangs").on('click', function(){
+   ordenarTodo(sangs,$("#sanguches"))
+});
+function ordenarTodo(lista,elemento){
+   const listaOrdenada = lista.sort(function (a, b){
       return a.precio - b.precio;
-   })]
-   const listaSangPrecio = [sangs.sort(function (a, b){
-      return a.precio - b.precio;
-   })]
-   console.log(listaPizzasPrecio);
-   console.log(listaSangPrecio);
+   });
+   resetItems($(elemento));
+   createItems($(elemento),listaOrdenada);
+};
+function resetItems(reset){
+   $(reset).empty();
+};
+
+//AGREGAR AL CARRITO
+function agregarProd (producto){
+   Object.defineProperty(producto, 'cant', { value: 1, writable: true });
+   listaCarrito.push(producto);
 }
-const listaCarrito = [ ];
-function agregarCarrito(productoCarrito){
-   switch(productoCarrito){
-      case productoCarrito = "muzzarella":
-         listaCarrito.push(pizza1);
-         alert("Producto agregado exitosamente");
-         break;
-      case productoCarrito = "roquefort":
-         listaCarrito.push(pizza2);
-         alert("Producto agregado exitosamente");
-         break;
-      case productoCarrito = "rucula":
-         listaCarrito.push(pizza3);
-         alert("Producto agregado exitosamente");
-         break;
-      case productoCarrito = "bondiola":
-         listaCarrito.push(sang1);
-         alert("Producto agregado exitosamente");
-         break;
-      case productoCarrito = "coleslow":
-         listaCarrito.push(sang2);
-         alert("Producto agregado exitosamente");
-         break;
-      case productoCarrito = "jamon crudo":
-         listaCarrito.push(sang3);
-         alert("Producto agregado exitosamente");
-         break;
-      default:
-         alert("No contamos con ese producto");
-   }
-}
-function carrito () {
-   let cantProductos = parseInt(prompt("Ingrese la cantidad de productos que vas a comprar"));
-   for(i=1; i<=cantProductos; i++){
-      productoCarrito = prompt("Ingrese el gusto del producto Ej.Rucula").toLowerCase();
-      agregarCarrito(productoCarrito);
-   }
-   for (let i = 0; i < listaCarrito.length; i++) {
-      listaCarrito[i].promociones(prompt("Ingrese su banco para ver promociones Itau-BBVA-Santander").toLowerCase());
+
+//Modal carrito
+$("#btn-carrito").on('click', function(){
+   modalCarrito($("#carrito"),listaCarrito,$("#carrito"));
+});
+
+function modalCarrito(modal,lista,reset){
+   resetItems(reset)
+   for(const prods of lista){
+      $(modal).append(` <tr>
+                           <td scope="row"> <img class="modal-img rounded-lg" src="${prods.img}"></img></td>
+                           <td>
+                              <h2>${prods.nombre}</h2>
+                              <p>$${prods.precio}</p>
+                           </td>
+                           <td>
+                              ${prods.cant}
+                              <div>
+                                 <button type="button" class="btn btn-outline-success">+</button>
+                                 <button  type="button" class="btn btn-outline-danger ${prods.id}">-</button>
+                              </div>
+                           </td>
+                           <td>@mdo</td>
+                        </tr>`);
+      $(`.${prods.id}`).on('click', function() {
+         btnMenos(prods.cant)
+      })
    }
 }
 
-let verBoton=document.getElementById("ver");
-verBoton.addEventListener("click", verCarrito);
-function verCarrito(){
-   console.log("Productos agregados al carrito:");
-   console.log(listaCarrito);
+function btnMenos(cant){
+   (cant != 1) ? cant-- : eliminarItem(listaCarrito);
+   modalCarrito($("#carrito"),listaCarrito,$("#carrito"));
 }
+function eliminarItem(lista){
+   let prodSeleccionado = lista.find(({id}) => id == elementos.id);
+   lista = lista.filter((carritoId) => {
+      return carritoId !== prodSeleccionado;
+  });
 
+}
+// function borrarItemCarrito(evento) {
+//    // Obtenemos el producto ID que hay en el boton pulsado
+//    const id = evento.target.dataset.item;
+//    // Borramos todos los productos
+//    carrito = carrito.filter((carritoId) => {
+//        return carritoId !== id;
+//    });
+//    // volvemos a renderizar
+//    renderizarCarrito();
+//    // Calculamos de nuevo el precio
+//    calcularTotal();
+//    // Actualizamos el LocalStorage
+//    guardarCarritoEnLocalStorage();
+
+// 

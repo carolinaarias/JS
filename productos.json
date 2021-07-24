@@ -1,0 +1,44 @@
+[
+   { 
+      "id": 1, 
+      "nombre": "Muzzarella", 
+      "precio": 550, 
+      "descripcion":"Queso muzzarella con oregano.", 
+      "img":"img/comida/Muzza .png" 
+   },
+   {
+      "id": 2, 
+      "nombre": "Roquefort", 
+      "precio": 800, 
+      "descripcion":"Queso roquefort con oregano.", 
+      "img":"img/comida/Roque (1).png" 
+   },
+   {
+      "id": 3, 
+      "nombre": "Rucula", 
+      "precio": 700, 
+      "descripcion":"Rucula con jamon crudo y muzzarella.", 
+      "img":"img/comida/Rucula (1).png"
+   },
+   {
+      "id": 4, 
+      "nombre": "Bondiola", 
+      "precio": 700, 
+      "descripcion":"Bondiola braseada, queso brie y pan de papa.", 
+      "img":"img/comida/Sw-Bondio.png"
+   },
+   {
+      "id": 5, 
+      "nombre": "Coleslow", 
+      "precio": 750, 
+      "descripcion":"Vacio, muzzarella gratinada y ensalada coleslow.", 
+      "img":"img/comida/Sw-Coleslow.png"
+   },
+   {
+      "id": 6, 
+      "nombre": "Jamon Crudo", 
+      "precio": 650, 
+      "descripcion":"Jamon crudo, brie y rucula.", 
+      "img":"img/comida/Sw-Crudo.png"
+   }
+]
