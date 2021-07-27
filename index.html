@@ -29,14 +29,31 @@
                
                </tbody>
              </table>
-            
-         </div>
          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary">Finalizar compra</button>
+            <p>Total : <span id="total-compra"></span></p>
+         </div>
+         </div>
+         <div class="modal-footer flex-row">
+            <button id="btn-vaciar" type="button" class="btn-vaciar btn ">Vaciar carrito</button>
+            <div>
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+               <button type="button" class="btn btn-primary">Finalizar compra</button>
+            </div>
          </div>
       </div>
       </div>
+   </div>
+   <div id="alert-carrito"class="alert alert-warning alert-dismissible fade show fixed" role="alert">
+      Producto agregado <strong>al carrito </strong>correctamente.
+      <button id="close-carrito" type="button" class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+   <div id="alert-prod"class="alert alert-warning alert-dismissible fade show fixed" role="alert">
+      <strong>¡Atencion!</strong> No puedes agregar mas de 5 productos a la vez.
+      <button id="close-prod" type="button" class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
    </div>
    <section class="carta" >
       <div id="header" class=" carta__bar container-fluid fixed flex-row ">

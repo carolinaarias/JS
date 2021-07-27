@@ -114,11 +114,75 @@ ul, ol {
   .btn_ord button{
     font-size: 1.5rem;
   }
+  .modal-title{
+    font-size: 2rem;
+  }
+  .tit-prods{
+    font-size: 1.8rem;
+  }
+  .precio-prods{
+    font-size: 1.5rem;
+  }
+  .total-prods{
+    font-size: 1.5rem;
+  }
+  .modal-img{
+    width: 9rem;
+  }
+  .cant{
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  .cant button{
+    margin: 1rem;
+    font-size: 1.2rem;
+  }
+  #total-compra{
+    font-size: 2rem;
+  }
+  .modal-footer{
+    justify-content: space-between;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .modal-footer p{
+    font-size: 2rem;
+  }
+  .btn-vaciar{
+    background-color: rgba(255, 0, 0, 0.733);
+    border-color: red;
+    color: white;
+  }
+  .btn-vaciar:hover{
+    background-color: rgb(201, 1, 1);
+    border-color: rgb(156, 0, 0);
+  }
+  .btn-vaciar:active{
+    background-color: rgb(201, 1, 1);
+    border-color: rgb(156, 0, 0);
+  }
+  .modal-footer button{
+    font-size: 1.4rem;
+  }
   #carrito td{
     width: 25%;
   }
-  .modal-img{
-    width: 10rem;
+  
+  .alert{
+    background-color: #70ce70d7;
+    color: white;
+    font-size: 1.5rem;
+    border-color: #70ce70;
+    width: 100%;
+    bottom: 0;
+    z-index: 10;
+    text-align: center;
+    display: none;
+  }
+  #alert-prod{
+    background-color: red;
+    border-color: red;
+
   }
 
  /*-----FOOTER-----*/

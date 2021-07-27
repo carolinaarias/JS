@@ -1,4 +1,11 @@
 //AJAX
+var prods=[];
+$(document).ready(function() {
+   $.get('productos.json', function(datos){
+      datos=prods;
+  });
+});
+
 $(document).ready(function() {
    $.get('productos.json', function(datos){
       createItems($("#pizzas"),datos.slice(0,3),datos)
@@ -110,10 +117,16 @@ function createItems(ul,lista,productos){
          //buscar producto por id
          let prodSeleccionado = listaCarrito.find(({id}) => id == elementos.id);
          (prodSeleccionado != undefined) ? prodSeleccionado.cant++ : agregarProd(productos[elementos.id - 1]);
-         localStorage.setItem('Carrito', JSON.stringify(listaCarrito));
+         guardarLS();
+         mostrarAlert($("#alert-carrito"));
       });
    }
 }
+//Local storage
+function guardarLS(){
+   localStorage.setItem('Carrito', JSON.stringify(listaCarrito));
+};
+
 
 //Ordenar Productos
 $("#ordenarPizzas").on('click', function(){
@@ -135,62 +148,82 @@ function resetItems(reset){
 
 //AGREGAR AL CARRITO
 function agregarProd (producto){
-   Object.defineProperty(producto, 'cant', { value: 1, writable: true });
    listaCarrito.push(producto);
 }
 
 //Modal carrito
+let totalCompra = $('#total-compra');
+let total = 0;
+
 $("#btn-carrito").on('click', function(){
    modalCarrito($("#carrito"),listaCarrito,$("#carrito"));
 });
-
+$("#btn-vaciar").on('click', function(){
+   for (let i = listaCarrito.length; i > 0; i--) {
+      listaCarrito.pop();
+   }
+   total=0;
+   totalCompra.text("$ "+ total);
+   modalCarrito($("#carrito"),listaCarrito,$("#carrito"));
+   guardarLS();
+});
 function modalCarrito(modal,lista,reset){
    resetItems(reset)
    for(const prods of lista){
-      $(modal).append(` <tr>
+      $(modal).append(` <tr id="tr-${prods.id}">
                            <td scope="row"> <img class="modal-img rounded-lg" src="${prods.img}"></img></td>
                            <td>
-                              <h2>${prods.nombre}</h2>
-                              <p>$${prods.precio}</p>
+                              <h2 class="tit-prods">${prods.nombre}</h2>
+                              <p class="precio-prods">$${prods.precio}</p>
                            </td>
-                           <td>
-                              ${prods.cant}
+                           <td class="cant">
+                              <p >${prods.cant}</p>
                               <div>
-                                 <button type="button" class="btn btn-outline-success">+</button>
-                                 <button  type="button" class="btn btn-outline-danger ${prods.id}">-</button>
+                                 <button id="mas-${prods.id}" type="button" class="btn btn-outline-success"><strong>+</strong></button>
+                                 <button  id="menos-${prods.id}" type="button" class="btn btn-outline-danger"><strong>-</strong></button>
                               </div>
                            </td>
-                           <td>@mdo</td>
+                           <td>
+                              <p class="total-prods"> ${prods.precio * prods.cant}</p>
+                           </td>
                         </tr>`);
-      $(`.${prods.id}`).on('click', function() {
-         btnMenos(prods.cant)
-      })
+      $(`#menos-${prods.id}`).on('click', function() {
+         let idBoton = parseInt($(this)[0].id.slice(6));
+         let productoSeleccionado = listaCarrito.find(prods => prods.id === idBoton);
+         (productoSeleccionado.cant != 1) ? productoSeleccionado.cant-- : console.log("eliminar");
+         modalCarrito($("#carrito"),listaCarrito,$("#carrito"));
+         guardarLS();
+      });
+      $(`#mas-${prods.id}`).on('click', function() {
+         let idBoton = parseInt($(this)[0].id.slice(4));
+         let productoSeleccionado = listaCarrito.find(prods => prods.id === idBoton);
+         (productoSeleccionado.cant != 5) ? productoSeleccionado.cant++ : mostrarAlert($("#alert-prod"));
+         modalCarrito($("#carrito"),listaCarrito,$("#carrito"));
+         guardarLS();
+      });
+      listaCarrito.forEach(function(dato){
+          total += dato.precio * dato.cant;
+      });
+      totalCompra.text("$ "+ total);
    }
 }
 
-function btnMenos(cant){
-   (cant != 1) ? cant-- : eliminarItem(listaCarrito);
-   modalCarrito($("#carrito"),listaCarrito,$("#carrito"));
+function eliminarItem(elemento) {
+   $(elemento).empty();
+};
+//ALERTS
+function mostrarAlert (id){
+   $(id).css("display","block");
 }
-function eliminarItem(lista){
-   let prodSeleccionado = lista.find(({id}) => id == elementos.id);
-   lista = lista.filter((carritoId) => {
-      return carritoId !== prodSeleccionado;
-  });
 
+$("#close-carrito").on('click',function(){
+   cerrarAlert($("#alert-carrito"));
+});
+$("#close-prod").on('click',function(){
+   cerrarAlert($("#alert-prod"));
+});
+function cerrarAlert(id){
+   $(id).css("display","none");
 }
-// function borrarItemCarrito(evento) {
-//    // Obtenemos el producto ID que hay en el boton pulsado
-//    const id = evento.target.dataset.item;
-//    // Borramos todos los productos
-//    carrito = carrito.filter((carritoId) => {
-//        return carritoId !== id;
-//    });
-//    // volvemos a renderizar
-//    renderizarCarrito();
-//    // Calculamos de nuevo el precio
-//    calcularTotal();
-//    // Actualizamos el LocalStorage
-//    guardarCarritoEnLocalStorage();
 
-// 
+
