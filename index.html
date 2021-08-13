@@ -12,37 +12,127 @@
    <link rel="stylesheet" href="styles.css">
 </head>
 <body class="menu">
-   <!-- Modal -->
-   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <!-- NAV GENERAL -->
+   <header class="container-fluid fixed flex-row">
+      <div>
+         <a class="navbar-brand" href="../index.html">
+            <img src="img/logos/Holandes Blanco1.png" alt="logo" class="logo">
+         </a>
+      </div>
+      <nav class="navbar navbar-expand-lg ">
+         <div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <img class="navbar-toggler-icon" src="multimedia/icons/menu.svg" alt="">
+            </button>
+         </div>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+           <ul class="navbar-nav mr-auto">
+             <li class="nav-item ">
+               <a class="nav-link" href="pages/inicio.html">INICIO </span></a>
+             </li>
+             <li class="nav-item ">
+               <a class="nav-link" href="pages/nosotros.html">NOSOTROS</a>
+             </li>
+             <li class="nav-item ">
+               <a class="nav-link" href="pages/cervezas.html">CERVEZAS</a>
+             </li>
+             <li class="nav-item active">
+               <a class="nav-link" href="index.html">CARTA<span class="sr-only">(current)</a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" href="pages/encontranos.html">ENCONTRANOS</a>
+             </li>
+           </ul>
+         </div>
+       </nav>
+   </header>
+   <!-- MODAL 1-->
+   <div class="modal fade modal1" id="carritoModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Tu pedido</h5>
+            <h5 class="modal-title container" id="exampleModalLabel">Tu pedido</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
          </div>
          <div class="modal-body">
             <table class="table table-hover">
-               
-               <tbody id="carrito">
+               <tbody class="container-fluid" id="carrito">
                
                </tbody>
              </table>
-         <div class="modal-footer">
-            <p>Total : <span id="total-compra"></span></p>
+         <div class="modal-footer ">
+            
          </div>
+         </div>
+         <div class="modal-footer flex-row">
+            <p>Total : <span id="total-compra"></span></p>
          </div>
          <div class="modal-footer flex-row">
             <button id="btn-vaciar" type="button" class="btn-vaciar btn ">Vaciar carrito</button>
             <div>
                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-               <button type="button" class="btn btn-primary">Finalizar compra</button>
+               <button type="button" id="btn-siguiente" class="btn btn-primary" data-toggle="modal" data-dismiss="modal" data-target="#carritoModal2">Siguiente</button>
             </div>
          </div>
       </div>
       </div>
    </div>
+   <!-- MODAL 2-->
+   <div class="modal fade" id="carritoModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title container" id="exampleModalLabel">Tus Datos</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <table class="table table-hover">
+               <tbody id="modalBody">
+               </tbody>
+            </table>
+         </div>
+         <div class="modal-footer flex-row">
+            <div id="btn-promos" class="btn-group dropup">
+               <button type="button"  class="btn btn-succes dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Promociones
+               </button>
+               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a id="efectivo" class="dropdown-item" href="#">Efectivo</a>
+                  <a id="santander" class="dropdown-item" href="#">Santander Rio</a>
+                  <a id="itau" class="dropdown-item" href="#">Itau</a>
+                  <a id="otro" class="dropdown-item" href="#">Otro</a>
+               </div>
+            </div>
+            <p>Total : <span id="total-compra2"></span></p>
+         </div>
+         <div class="modal-footer flex-row">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="#carritoModal1">Atras</button>
+            <button type="button" id="btn-fc" class="btn btn-primary" >Finalizar compra</button>
+         </div>
+      </div>
+      </div>
+   </div>
+   <!-- MODAL 3-->
+   <div class="modal fade" id="carritoModal3" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Compra Finalizada!</h5>
+         </div>
+         <div id="compra-fc" class="modal-body">
+        
+         </div>
+         <div class="modal-footer">
+            <button type="button" id="btn-gracias" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+         </div>
+      </div>
+      </div>
+   </div>
+   <!-- ALERTS -->
    <div id="alert-carrito"class="alert alert-warning alert-dismissible fade show fixed" role="alert">
       Producto agregado <strong>al carrito </strong>correctamente.
       <button id="close-carrito" type="button" class="close" aria-label="Close">
@@ -55,8 +145,10 @@
         <span aria-hidden="true">&times;</span>
       </button>
    </div>
+   <!-- CARTA -->
    <section class="carta" >
       <div id="header" class=" carta__bar container-fluid fixed flex-row ">
+         <!-- CARTA NAV -->
          <nav class="navbar navbar-expand-lg  ">
             <div>
                <a class="navbar-brand" href="#">CARTA</a>
@@ -73,7 +165,10 @@
                   <a id="btn-sangs" class="nav-link" href="#sanguches">SANGUCHES</a>
                </li>
                <li class="nav-item">
-                  <img id="btn-carrito" class="nav-icon" src="icons/shopping-cart.svg" data-toggle="modal" data-target="#exampleModal"alt="">
+                  <a id="btn-hamb" class="nav-link" href="#hamburguesas">HAMBURGUESAS</a>
+               </li>
+               <li class="nav-item">
+                  <img id="btn-carrito" class="nav-icon" src="icons/shopping-cart.svg" data-toggle="modal" data-target="#carritoModal1" alt="imagen de carrito de compras">
 
                </li>
             </ul>
@@ -81,28 +176,44 @@
          </nav>
       </div>
       <div class="carta__products container">
+         <!-- PIZZAS -->
          <ul>
             <li class="row">
                <h3 id="h3-pizzas">PIZZAS</h3>
                <div class="absolute btn_ord">
-                  <button type="button" id="ordenarPizzas" class="btn btn-info">Ordenar por precio</button>
+                  <button type="button" id="ordenarPizzasMenor" class="btn btn-light">Ordenar por menor precio</button>
+                  <button type="button" id="ordenarPizzasMayor" class="btn btn-light">Ordenar por mayor precio</button>
                </div>
             </li>
             <li>
                <ul id="pizzas" class=" row carta__products-info"></ul>
             </li>
+            <!-- SANGUCHES -->
             <li class="row">
                <h3 id="h3-sangs">SANGUCHES</h3>
-               <div class="absolute btn_ord">
-                  <button type="button" id="ordenarSangs" class="btn btn-info">Ordenar por precio</button>
+               <div class="absolute btn_ord ">
+                  <button type="button" id="ordenarSangsMenor" class="btn btn-light">Ordenar por menor precio</button>
+                  <button type="button" id="ordenarSangsMayor" class="btn btn-light">Ordenar por mayor precio</button>
                </div>
             </li>
             <li>
                <ul  id="sanguches" class=" row carta__products-info"></ul>                     
             </li>
+            <!-- HAMBURGUESAS -->
+            <li class="row">
+               <h3 id="h3-hamb">HAMBURGUESAS</h3>
+               <div class="absolute btn_ord ">
+                  <button type="button" id="ordenarHambMenor" class="btn btn-light">Ordenar por menor precio</button>
+                  <button type="button" id="ordenarHambMayor" class="btn btn-light">Ordenar por mayor precio</button>
+               </div>
+            </li>
+            <li>
+               <ul  id="hamburguesas" class=" row carta__products-info"></ul>                     
+            </li>
          </ul>
       </div>
    </section>
+   <!-- FOOTER -->
    <footer class="flex-row container-fluid p-2">
       <div class="footer_info col-12 col-md-4">
         <a href="encontranos.html">
@@ -138,7 +249,7 @@
    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
    <script src="script.js"></script>
 </body>
 </html>

@@ -30,6 +30,37 @@ ul, ol {
   position: absolute; }
 
 /*-----HEADER-----*/
+header {
+  background-color: rgba(27, 27, 27, 0.945);
+  box-shadow: 2px 2px 2px 3px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  justify-content: space-between;
+  align-items: center; }
+
+.active {
+  text-decoration: overline; }
+
+.nav-link {
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  margin: 1.5rem; }
+
+.nav-link:hover {
+  color: #70ce70; }
+
+.navbar-brand img {
+  transition: all 0.5s; }
+
+.navbar-brand img:hover {
+  opacity: 60%; }
+
+.navbar-brand img {
+  padding: 1rem;
+  height: 12vh;
+  width: auto;
+  margin-left: 3rem; }
 
 .nav-link {
   font-weight: 600;
@@ -46,14 +77,19 @@ ul, ol {
 }
 /*-----CARTA-----*/
 .menu {
-   background-color: white; }
+  background-color: aliceblue;
+}
  
  .carta .carta__bar {
    background-color: rgba(131, 131, 131, 0.911);
+   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
    z-index: 2;
    justify-content: center;
    align-items: center; }
  
+ .carta .navbar{
+   padding-top: 15vh;
+ }
  .carta .navbar-brand {
    font-size: 3rem;
    font-weight: 800;
@@ -64,7 +100,7 @@ ul, ol {
    font-size: 1.8rem; }
   
  .carta__products {
-   padding-top: 15vh; }
+   padding-top: 30vh; }
   .carta__products li {
      margin-bottom: 3rem; }
   .carta__products li h3 {
@@ -77,7 +113,8 @@ ul, ol {
    align-items: center; }
    .carta__products-info li .carta__products-info-div {
      padding: 3.2rem;
-     background-color: #e9e8e8;
+     background-color: #1d1d1d;
+     color: white;
      border-radius: 1.6rem; }
      .carta__products-info li .carta__products-info-div h4 {
        font-size: 2rem;
@@ -89,19 +126,24 @@ ul, ol {
        font-size: 1.6rem; }
    .carta__products-info li img {
      width: 100%;
-     height: 30%;
      margin-bottom: 1.6rem; }
- 
+ .carta__products-info-div{
+   height: 50vh;
+   
+ }
  .carta__products-info-div:hover {
-   box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2); }
+   box-shadow: 0px 3px 3px 5px #70ce70; }
  
+ .products-titles{
+  justify-content: space-between;
+ }
  .carta__products-info li h4 {
-   margin-bottom: 1.6rem;
+   margin-bottom: 1rem;
    font-size: 2rem;
    font-weight: 500; }
  
  .carta__products-info li P {
-   font-size: 1.5rem; }
+   font-size: 1rem; }
   
   .btn-edit{
     background-color: rgb(255, 255, 255);
@@ -110,9 +152,22 @@ ul, ol {
   }
   .btn_ord{
     right: 25rem;
+    
   }
   .btn_ord button{
     font-size: 1.5rem;
+    padding: 0.7rem;
+    margin-right: 1rem;
+    background-color: rgba(226, 226, 226, 0.774);
+
+  }
+  .btn_ord button:hover{
+    background-color: rgba(0, 0, 0, 0.596);
+    color: white;
+  }
+  .btn_ord button:current{
+    background-color: rgba(0, 0, 0, 0.596);
+    color: white;
   }
   .modal-title{
     font-size: 2rem;
@@ -154,12 +209,15 @@ ul, ol {
     color: white;
   }
   .btn-vaciar:hover{
-    background-color: rgb(201, 1, 1);
+    background-color: rgb(197, 74, 74);
     border-color: rgb(156, 0, 0);
   }
   .btn-vaciar:active{
-    background-color: rgb(201, 1, 1);
-    border-color: rgb(156, 0, 0);
+    background-color: rgb(187, 66, 66);
+    border-color: rgb(153, 74, 74);
+  }
+  .btn-siguiente{
+    display: none;
   }
   .modal-footer button{
     font-size: 1.4rem;
@@ -167,7 +225,42 @@ ul, ol {
   #carrito td{
     width: 25%;
   }
-  
+  .modal-header {
+    background-color: #70ce7077;
+    text-align: center !important;
+    font-size: 2rem !important;
+  }
+  #btn-promos{
+    border-radius: 0.5rem;
+    background-color: #70ce7077;
+    border-color: #498549;
+    border-width: 1rem;
+  }
+  .titulo-usuario{
+    font-size: 1.8rem;
+    font-weight: 200;
+  }
+  #compra-fc p{
+    font-size: 1.6rem;
+  }
+  #compra-fc span{
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+  .dropdown-item{
+    font-size: 1.4rem;;
+  }
+  .input-container{
+    margin-bottom: 1rem;
+  }
+  .form-control{
+    font-size: 1.4rem;
+    width: 60%;
+  }
+  .input-group-text{
+    font-size: 1.4rem;
+  }
+
   .alert{
     background-color: #70ce70d7;
     color: white;

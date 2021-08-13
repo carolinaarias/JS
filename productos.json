@@ -1,50 +1,122 @@
 [
    { 
       "id": 1, 
-      "nombre": "Muzzarella", 
-      "precio": 550, 
+      "nombre": "Turner", 
+      "precio": 590, 
       "descripcion":"Queso muzzarella con oregano.", 
-      "img":"img/comida/Muzza .png",
+      "img":"img/comida/muzza1.jpg",
       "cant":1
    },
    {
       "id": 2, 
-      "nombre": "Roquefort", 
-      "precio": 800, 
+      "nombre": "Mary Blue", 
+      "precio": 710, 
       "descripcion":"Queso roquefort con oregano.", 
-      "img":"img/comida/Roque (1).png" ,
+      "img":"img/comida/roque1.jpg" ,
       "cant":1
    },
    {
       "id": 3, 
-      "nombre": "Rucula", 
-      "precio": 700, 
+      "nombre": "Davy Jones", 
+      "precio": 770, 
       "descripcion":"Rucula con jamon crudo y muzzarella.", 
-      "img":"img/comida/Rucula (1).png",
+      "img":"img/comida/rucula1.jpg",
       "cant":1
    },
    {
       "id": 4, 
-      "nombre": "Bondiola", 
-      "precio": 700, 
-      "descripcion":"Bondiola braseada, queso brie y pan de papa.", 
-      "img":"img/comida/Sw-Bondio.png",
+      "nombre": "Mary Red", 
+      "precio": 730, 
+      "descripcion":"Muzzarella, tomate y ajo.", 
+      "img":"img/comida/tomate1.jpg",
       "cant":1
    },
    {
       "id": 5, 
-      "nombre": "Coleslow", 
-      "precio": 750, 
-      "descripcion":"Vacio, muzzarella gratinada y ensalada coleslow.", 
-      "img":"img/comida/Sw-Coleslow.png",
+      "nombre": "Calipso", 
+      "precio": 720, 
+      "descripcion":"Muzzarella y verdeo.", 
+      "img":"img/comida/verdeo1.jpg",
       "cant":1
    },
    {
       "id": 6, 
-      "nombre": "Jamon Crudo", 
+      "nombre": "Parley", 
+      "precio": 1400, 
+      "descripcion":"Fugazzeta rellena.", 
+      "img":"img/comida/fugga1.jpg",
+      "cant":1
+   },
+   {
+      "id":7 , 
+      "nombre": "Gran atraco", 
       "precio": 650, 
+      "descripcion":"Bondiola braseada, queso brie y coleslow.", 
+      "img":"img/comida/bondiola1.jpg",
+      "cant":1
+   },
+   {
+      "id": 8, 
+      "nombre": "Corsario", 
+      "precio": 620, 
+      "descripcion":"Pollo desmenuzado, pategras y rucula.", 
+      "img":"img/comida/pollo1.jpg",
+      "cant":1
+   },
+   {
+      "id":9 , 
+      "nombre": "Davy Jones", 
+      "precio": 640, 
       "descripcion":"Jamon crudo, brie y rucula.", 
-      "img":"img/comida/Sw-Crudo.png",
+      "img":"img/comida/jc1.jpg",
+      "cant":1
+   },
+   {
+      "id":10 , 
+      "nombre": "Blue Samba", 
+      "precio": 660, 
+      "descripcion":"Roquefort, cebolla , rucula y panceta.", 
+      "img":"img/comida/blusamba1.jpg",
+      "cant":1
+   },
+   {
+      "id":11 , 
+      "nombre": "St Mushroom", 
+      "precio": 680, 
+      "descripcion":"Hongos, queso brie y cebolla morada.", 
+      "img":"img/comida/hongos.jpg",
+      "cant":1
+   },
+   {
+      "id":12 , 
+      "nombre": "Onion Crispy", 
+      "precio": 660, 
+      "descripcion":"Cebolla crispy, chedar y aderezos.", 
+      "img":"img/comida/onion.jpg",
+      "cant":1
+   },
+   {
+      "id":13 , 
+      "nombre": "Shrek Errante", 
+      "precio": 690, 
+      "descripcion":"Guacamole, nachos y chedar.", 
+      "img":"img/comida/shrek.jpg",
+      "cant":1
+   },
+   {
+      "id":14 , 
+      "nombre": "Smash Tercero", 
+      "precio": 690, 
+      "descripcion":"Triple smash, triple chedar.", 
+      "img":"img/comida/triplesmash.jpg",
+      "cant":1
+   },
+   {
+      "id":15 , 
+      "nombre": "Big Triple", 
+      "precio": 720, 
+      "descripcion":"Triple smash, triple chedar y huevo.", 
+      "img":"img/comida/triple.jpg",
       "cant":1
    }
 ]

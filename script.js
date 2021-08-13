@@ -1,103 +1,57 @@
 //AJAX
-var prods=[];
+const prods=[];
+const pizzas=[];
+const sanguches=[];
+const hamburguesas=[];
 $(document).ready(function() {
    $.get('productos.json', function(datos){
-      datos=prods;
+      //Crear listas 
+      datos.forEach(e=>prods.push(e));
+      datos.slice(0,6).forEach(e=>pizzas.push(e));
+      datos.slice(6,9).forEach(e=>sanguches.push(e));
+      datos.slice(9,16).forEach(e=>hamburguesas.push(e));
+      //Renderizar productos
+      createItems($(`#pizzas`),pizzas,prods);
+      createItems($(`#sanguches`),sanguches,prods);
+      createItems($(`#hamburguesas`),hamburguesas,prods);
   });
 });
 
-$(document).ready(function() {
-   $.get('productos.json', function(datos){
-      createItems($("#pizzas"),datos.slice(0,3),datos)
-  });
-  $.get('productos.json', function(datos){
-      createItems($("#sanguches"),datos.slice(3,7),datos);
-   });
-});
-
+//LISTA CARRITO DESDE EL LS
 let listaCarrito = JSON.parse(localStorage.getItem('Carrito')) || [];
 
 //ANIMACIONES MENU
-function scrollTop (ul,h3,btn){
-   displayNone(h3,btn)
+$("#btn-pizzas").click(function() {
+   scrollTop($("#pizzas"),$("#h3-pizzas"),$("#ordenarPizzasMenor"),$("#ordenarPizzasMayor"));
+ });
+ $("#btn-sangs").click(function() {
+   scrollTop($("#sanguches"),$("#h3-sangs"),$("#ordenarSangsMenor"),$("#ordenarSangsMayor"));
+ });
+ $("#btn-hamb").click(function() {
+   scrollTop($("#hamburguesas"),$("#h3-hamb"),$("#ordenarHambMenor"),$("#ordenarHambMayor"));
+ });
+function scrollTop (ul,h3,btn,btn2){
+   displayNone(h3,btn,btn2)
    $('html').animate({
-      scrollTop: $(ul).offset().top - 150
+      scrollTop: $(ul).offset().top - 250
    },1000)
    $(h3).delay(1000);
    $(btn).delay(1000);
-   titleSlide (h3,btn);
+   $(btn2).delay(1000);
+   titleSlide (h3,btn,btn2);
 };
-function titleSlide (h3,btn){
+function titleSlide (h3,btn,btn2){
    $(btn).slideDown(800);
+   $(btn2).slideDown(800);
    $(h3).slideDown(800);
 };
-function displayNone(h3,btn){
+function displayNone(h3,btn,btn2){
    $(h3).css("display","none");
    $(btn).css("display","none");
+   $(btn2).css("display","none");
 }
 
-$("#btn-pizzas").click(function() {
-   scrollTop($("#pizzas"),$("#h3-pizzas"),$("#ordenarPizzas"));
- });
- $("#btn-sangs").click(function() {
-   scrollTop($("#sanguches"),$("#h3-sangs"),$("#ordenarSangs"));
- });
-
-//PLANTILLA DE PRODUCTOS
-// class Productos{
-//    constructor(img,id,titulo,descripcion,precio){
-//       this.img = img;
-//       this.id = id;
-//       this.titulo = titulo;
-//       this.descripcion = descripcion;
-//       this.precio = precio;
-//    }
-//    promociones (banco){
-//       let descuento;
-//       let precio = this.precio;
-//       switch(banco){
-//          case banco ="itau":
-//             descuento = 10;
-//             alert("El banco Itau tiene el 10% de descuento");
-//             break;
-//          case banco = "santander":
-//             descuento = 5;
-//             alert("El banco Santander tiene el 5% de descuento");
-//             break;
-//          case banco = "bbva":
-//             descuento = 15;
-//             alert("El banco Frances tiene el 15% de descuento");
-//             break;
-//          default :
-//             descuento = 0;
-//             alert("Ese banco no posee promociones")
-//       }
-//       function calcularIva (precio){
-//          let costoIva = precio * 1.21;
-//          return costoIva;
-//       }
-//       function calcularPromo (descuento){
-//          let costoTotal = calcularIva(precio);
-//          let porcentaje = ((costoTotal * descuento)/100);
-//          let precioFinal = costoTotal - porcentaje;
-//          return precioFinal;
-//       }
-//       let costoIva = calcularIva(precio);
-//       alert("Precio con iva de la pizza: " + this.id+" $" +costoIva);
-//       let precioFinal = calcularPromo(descuento);
-//       alert("El precio final con el descuento es de $ " + precioFinal)
-//    } 
-// }
-//Crear Productos
-// const pizza1 = new Productos("img/comida/Muzza .png",1,"Muzzarella","Queso muzzarella con oregano.",500);
-// const pizza2 = new Productos("img/comida/Roque (1).png",2,"Roquefort","Queso roquefort con oregano.",800);
-// const pizza3 = new Productos("img/comida/Rucula (1).png",3,"Rucula","Rucula con jamon crudo y muzzarella.",700);
-// const sang1 = new Productos("img/comida/Sw-Bondio.png",1,"Bondiola","Bondiola braseada, queso brie y pan de papa.",700);
-// const sang2 = new Productos("img/comida/Sw-Coleslow.png",2,"Coleslow","Vacio, muzzarella gratinada y ensalada coleslow.",750);
-// const sang3 = new Productos("img/comida/Sw-Crudo.png",3,"Jamon Crudo","Jamon crudo, brie y rucula.",650);
-
-
-//FUNCION PARA GENERAR HTML DE LOS PRODUCTOS
+//RENDERIZAR PRODUCTOS
 function createItems(ul,lista,productos){
    for (const elementos of lista){
       $(ul).append(`<li class='col-12 col-md-6 col-lg-4'> 
@@ -106,8 +60,10 @@ function createItems(ul,lista,productos){
                                     <img class="rounded-lg"src='${elementos.img}'></img>
                                  </div>
                                  <div>
-                                    <h4>${elementos.nombre}</h4>
-                                    <span>$ ${elementos.precio}</span>
+                                    <div class="flex-row products-titles">
+                                       <h4>${elementos.nombre}</h4>
+                                       <span>$ ${elementos.precio}</span>
+                                    </div>
                                     <p> ${elementos.descripcion}</p>
                                     <button type="button" id="btn${elementos.id}" class="btn-edit btn btn-outline-success">Agregar a carrito</button>
                                  </div>
@@ -120,28 +76,50 @@ function createItems(ul,lista,productos){
          guardarLS();
          mostrarAlert($("#alert-carrito"));
       });
+
    }
 }
-//Local storage
+
+//GUARDAR EN LS
 function guardarLS(){
    localStorage.setItem('Carrito', JSON.stringify(listaCarrito));
 };
 
-
-//Ordenar Productos
-$("#ordenarPizzas").on('click', function(){
-   ordenarTodo(pizzas,$("#pizzas"))
+//ORDENAR PRODUCTOS
+$("#ordenarPizzasMenor").on('click', function(){
+   ordenarMenor(pizzas,$("#pizzas"))
 });
-$("#ordenarSangs").on('click', function(){
-   ordenarTodo(sangs,$("#sanguches"))
+$("#ordenarPizzasMayor").on('click', function(){
+   ordenarMayor(pizzas,$("#pizzas"))
 });
-function ordenarTodo(lista,elemento){
+$("#ordenarSangsMenor").on('click', function(){
+   ordenarMenor(sanguches,$("#sanguches"))
+});
+$("#ordenarSangsMayor").on('click', function(){
+   ordenarMayor(sanguches,$("#sanguches"))
+});
+$("#ordenarHambMenor").on('click', function(){
+   ordenarMenor(hamburguesas,$("#hamburguesas"))
+});
+$("#ordenarHambMayor").on('click', function(){
+   ordenarMayor(hamburguesas,$("#hamburguesas"))
+});
+function ordenarMenor(lista,elemento){
    const listaOrdenada = lista.sort(function (a, b){
       return a.precio - b.precio;
    });
    resetItems($(elemento));
-   createItems($(elemento),listaOrdenada);
+   createItems($(elemento),listaOrdenada,prods);
 };
+function ordenarMayor(lista,elemento){
+   const listaOrdenada = lista.sort(function (a, b){
+      return b.precio - a.precio;
+   });
+   resetItems($(elemento));
+   createItems($(elemento),listaOrdenada,prods);
+};
+
+//VACIAR LISTA
 function resetItems(reset){
    $(reset).empty();
 };
@@ -151,19 +129,39 @@ function agregarProd (producto){
    listaCarrito.push(producto);
 }
 
-//Modal carrito
+//MODAL CARRITO
 let totalCompra = $('#total-compra');
-let total = 0;
-
+let totalPromo = $('#total-compra2');
+if(listaCarrito.length === 0){
+   var total = 0;
+   totalCompra.text("$ "+ total);   
+}
 $("#btn-carrito").on('click', function(){
    modalCarrito($("#carrito"),listaCarrito,$("#carrito"));
+   if(listaCarrito.length === 0){
+      var total = 0;
+      totalCompra.text("$ "+ total);   
+   }
+   if(total == 0){
+      $("#btn-siguiente").css("display","none");
+   }else{
+      $("#btn-siguiente").css("display","inline-block");
+   }
 });
 $("#btn-vaciar").on('click', function(){
+   listaCarrito.forEach(e=> e.cant = 0)
    for (let i = listaCarrito.length; i > 0; i--) {
       listaCarrito.pop();
    }
-   total=0;
-   totalCompra.text("$ "+ total);
+   if(listaCarrito.length === 0){
+      var total = 0;
+      totalCompra.text("$ "+ total);   
+   }
+   if(total == 0){
+      $("#btn-siguiente").css("display","none");
+   }else{
+      $("#btn-siguiente").css("display","inline-block");
+   }
    modalCarrito($("#carrito"),listaCarrito,$("#carrito"));
    guardarLS();
 });
@@ -171,10 +169,12 @@ function modalCarrito(modal,lista,reset){
    resetItems(reset)
    for(const prods of lista){
       $(modal).append(` <tr id="tr-${prods.id}">
-                           <td scope="row"> <img class="modal-img rounded-lg" src="${prods.img}"></img></td>
+                           <td scope="row"> 
+                              <img class="modal-img rounded-lg" src="${prods.img}"></img>
+                           </td>
                            <td>
                               <h2 class="tit-prods">${prods.nombre}</h2>
-                              <p class="precio-prods">$${prods.precio}</p>
+                              <p class="precio-prods">$ ${prods.precio}</p>
                            </td>
                            <td class="cant">
                               <p >${prods.cant}</p>
@@ -184,15 +184,24 @@ function modalCarrito(modal,lista,reset){
                               </div>
                            </td>
                            <td>
-                              <p class="total-prods"> ${prods.precio * prods.cant}</p>
+                              <p class="total-prods"> $ ${prods.precio * prods.cant}</p>
                            </td>
                         </tr>`);
       $(`#menos-${prods.id}`).on('click', function() {
          let idBoton = parseInt($(this)[0].id.slice(6));
          let productoSeleccionado = listaCarrito.find(prods => prods.id === idBoton);
-         (productoSeleccionado.cant != 1) ? productoSeleccionado.cant-- : console.log("eliminar");
+         (productoSeleccionado.cant != 1) ? productoSeleccionado.cant-- : eliminarItem(idBoton);
          modalCarrito($("#carrito"),listaCarrito,$("#carrito"));
          guardarLS();
+         if(listaCarrito.length === 0){
+            var total = 0;
+            totalCompra.text("$ "+ total);   
+         }
+         if(total == 0){
+            $("#btn-siguiente").css("display","none");
+         }else{
+            $("#btn-siguiente").css("display","inline-block");
+         }
       });
       $(`#mas-${prods.id}`).on('click', function() {
          let idBoton = parseInt($(this)[0].id.slice(4));
@@ -201,27 +210,158 @@ function modalCarrito(modal,lista,reset){
          modalCarrito($("#carrito"),listaCarrito,$("#carrito"));
          guardarLS();
       });
-      listaCarrito.forEach(function(dato){
-          total += dato.precio * dato.cant;
-      });
-      totalCompra.text("$ "+ total);
+      total = listaCarrito.reduce((acc,{precio,cant}) => acc + precio * cant, 0 )
+      totalCompra.text("$ "+ total);   
+
    }
 }
-
-function eliminarItem(elemento) {
-   $(elemento).empty();
+function eliminarItem(boton) {
+   listaCarrito = listaCarrito.filter(item => item.id !== boton);
 };
-//ALERTS
-function mostrarAlert (id){
-   $(id).css("display","block");
+
+//PROMOCIONES
+var total2;
+$('#btn-siguiente').on('click', function(){
+   modalCarrito2($("#modalBody"),$("#modalBody"))
+})
+function modalCarrito2 (modalBody,reset) {
+   resetItems(reset)
+   $(modalBody).append(`
+                     <div class="input-group  flex-column container">
+                        <div  class="flex-row input-container">
+                           <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon1">Nombre</span>
+                           </div>
+                           <input type="text" id="usuario" class="form-control validar" placeholder="Juan Perez" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <div  class="flex-row input-container">
+                           <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon2">Celular</span>
+                           </div>
+                           <input type="tel" class="form-control validar" placeholder="+54..." aria-label="celular" aria-describedby="basic-addon2">
+                        </div>
+                        <div  class="flex-row input-container">
+                           <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon3">Email</span>
+                           </div>
+                           <input type="email" class="form-control validar" placeholder="juanperez@gmail.com" aria-label="celular" aria-describedby="basic-addon3">
+                        </div>
+                        <div  class="flex-row input-container">
+                           <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon3">Direccion</span>
+                           </div>
+                           <input type="text" id="direccion" class="form-control validar" placeholder="Calle 1234" aria-label="direccion" aria-describedby="basic-addon3">
+                        </div>
+                     </div>
+                        `)
+   totalPromo.text("$ "+total);
+}
+$("#efectivo").on('click', function(event){
+   let id = event.target.id;
+   if(total !== 0){
+      promos(id);
+   }
+   
+})
+$("#santander").on('click', function(event){
+   let id = event.target.id;
+   if(total !== 0){
+      promos(id);
+   }
+})
+$("#itau").on('click', function(event){
+   let id = event.target.id;
+   if(total !== 0){
+      promos(id);
+   }
+})
+$("#otro").on('click', function(){
+   totalPromo.text("$ "+total);
+})
+function promos(id){
+   let descuento; 
+   switch(id){
+      case id ="itau":
+         descuento = 10;
+         break;
+      case id = "santander":
+         descuento = 5;
+         break;
+      case id = "efectivo":
+         descuento = 15;
+         break;
+      default :
+         descuento = 0;
+   }
+   total2 = calcularPromo(descuento);
+   totalPromo.text("$ "+ total2);   
+}
+function calcularPromo (descuento){
+    let porcentaje = ((total * descuento)/100);
+    let precioFinal = total - porcentaje;
+    return precioFinal;
 }
 
+//FORMULARIO
+$("#btn-fc").on('click',function(){
+   i = validar();
+   if (i == false){
+      $('.validar').css("border-color","red");
+   }else{
+      $("#btn-fc").attr("data-dismiss","modal");
+      $("#btn-fc").attr("data-toggle","modal");
+      $("#btn-fc").attr("data-target","#carritoModal3");
+   }
+   if(total2 == null){
+      totalFc=total;
+   }else{
+      totalFc=total2;
+   }
+   modalCarrito3($('#compra-fc'))
+})
+function validar() {
+   let input = $('.validar').val();
+   if (input.length == 0) {
+     return false;
+   }else{
+      return true;
+   }
+ }
+ function datos(id){
+   var i = $(id).val();
+   return i;
+ }
+
+ //COMPROBANTE DE FC
+ var totalFc;
+function modalCarrito3 (modal){
+   resetItems(modal)
+   var usuario = datos($('#usuario'));
+   var direc = datos($('#direccion'));
+   $(modal).append(`
+                     <h4 class="titulo-usuario" >El Puerto esta preparando tu pedido ${usuario} !</h4>
+                     <p>Desembarcamos en:  ${direc}</p>
+                     <span>Tu total: $${totalFc} </span>  
+                  `)
+}
+$('#btn-gracias').on('click',function(){
+   listaCarrito.forEach(e=> e.cant = 0)
+   for (let i = listaCarrito.length; i > 0; i--) {
+      listaCarrito.pop();
+   }
+   guardarLS()
+})
+
+//ALERTS
 $("#close-carrito").on('click',function(){
    cerrarAlert($("#alert-carrito"));
 });
 $("#close-prod").on('click',function(){
    cerrarAlert($("#alert-prod"));
 });
+function mostrarAlert (id){6
+   $(id).css("display","block");
+}
 function cerrarAlert(id){
    $(id).css("display","none");
 }
